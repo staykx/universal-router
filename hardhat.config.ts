@@ -23,51 +23,35 @@ export default {
   paths: {
     sources: './contracts',
   },
+  defaultNetwork: 'xrplDevnet',
   networks: {
-    hardhat: {
-      allowUnlimitedContractSize: false,
-      chainId: 1,
-      forking: {
-        url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
-        blockNumber: 15360000,
-      },
+    xrplDevnet: {
+      url: 'https://rpc-evm-sidechain.xrpl.org/',
+      chainId: 1440002,
+      accounts: [process.env.DEPLOYER_PRIVATE_KEY],
     },
-    mainnet: {
-      url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
+    sepolia: {
+      url: `https://sepolia.infura.io/v3/${process.env.INFURA_KEY}`,
+      chainId: 11155111,
+      accounts: [process.env.DEPLOYER_PRIVATE_KEY],
+      timeout: 10000000
+    }
+  },
+  etherscan: {
+    apiKey: {
+      xrplDevnet: 'whatever',
+      sepolia: process.env.ETHERSCAN_API_KEY,
     },
-    ropsten: {
-      url: `https://ropsten.infura.io/v3/${process.env.INFURA_API_KEY}`,
-    },
-    rinkeby: {
-      url: `https://rinkeby.infura.io/v3/${process.env.INFURA_API_KEY}`,
-    },
-    goerli: {
-      url: `https://goerli.infura.io/v3/${process.env.INFURA_API_KEY}`,
-    },
-    kovan: {
-      url: `https://kovan.infura.io/v3/${process.env.INFURA_API_KEY}`,
-    },
-    arbitrumRinkeby: {
-      url: `https://rinkeby.arbitrum.io/rpc`,
-    },
-    arbitrum: {
-      url: `https://arb1.arbitrum.io/rpc`,
-    },
-    optimismKovan: {
-      url: `https://kovan.optimism.io`,
-    },
-    optimism: {
-      url: `https://mainnet.optimism.io`,
-    },
-    polygon: {
-      url: `https://polygon-mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
-    },
-    base: {
-      url: `https://developer-access-mainnet.base.org`,
-    },
-    baseGoerli: {
-      url: `https://goerli.base.org`,
-    },
+    customChains: [
+      {
+        network: 'xrplDevnet',
+        chainId: 1440002,
+        urls: {
+          apiURL: 'https://evm-sidechain.xrpl.org/api',
+          browserURL: 'https://evm-sidechain.xrpl.org',
+        }
+      }
+    ]
   },
   namedAccounts: {
     deployer: 0,
